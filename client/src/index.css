@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", serif;
+  --font-sans: "Inter", sans-serif;
+
+  --color-ink: #1B2A4A;
+  --color-paper: #FAF9F6;
+  --color-amber: #D98E2C;
+  --color-success: #3A7D5C;
+  --color-slate: #5B6472;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-paper);
+}

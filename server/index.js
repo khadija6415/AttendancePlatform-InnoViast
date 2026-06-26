@@ -10,6 +10,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/classes', require('./routes/classRoutes'));
+app.use('/api/attendance', require('./routes/attendanceRoutes'));
 
 // Test route
 app.get('/', (req, res) => {
