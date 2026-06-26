@@ -61,4 +61,14 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { signup, login };
+// Get all students
+const getStudents = async (req, res) => {
+  try {
+    const students = await User.find({ role: 'student' }).select('-password');
+    res.status(200).json(students);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+};
+
+module.exports = { signup, login, getStudents };

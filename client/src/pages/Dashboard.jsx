@@ -108,9 +108,19 @@ function Dashboard() {
                           {new Date(cls.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })} · {cls.time}
                         </p>
                       </div>
-                      <span className="text-xs px-3 py-1 rounded-full bg-ink/5 text-ink">
-                        {cls.instructor?.name || 'Instructor'}
-                      </span>
+                      <div className="flex items-center gap-3">
+                        <span className="text-xs px-3 py-1 rounded-full bg-ink/5 text-ink">
+                          {cls.instructor?.name || 'Instructor'}
+                        </span>
+                        {(user?.role === 'admin' || user?.role === 'instructor') && (
+                          <button
+                            onClick={() => navigate(`/attendance?session=${cls._id}`)}
+                            className="text-xs px-3 py-1.5 rounded-full bg-amber text-white font-medium hover:bg-amber/90 transition"
+                          >
+                            Mark attendance
+                          </button>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>
