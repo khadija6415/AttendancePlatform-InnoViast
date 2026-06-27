@@ -1,32 +1,36 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 
-function Login() {
+function Signup() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('student');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:5050/api/auth/login', {
+      await axios.post('http://localhost:5050/api/auth/signup', {
+        name,
         email,
         password,
+        role,
       });
 
-      login(res.data.user, res.data.token);
-      navigate('/dashboard');
+      setSuccess('Account created successfully. Redirecting to login…');
+      setTimeout(() => navigate('/login'), 1500);
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
+      setError(err.response?.data?.message || 'Could not create account. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -52,10 +56,10 @@ function Login() {
 
         <div className="bg-white rounded-2xl shadow-xl shadow-ink/5 border border-ink/5 p-8 sm:p-10">
           <h1 className="font-display text-3xl text-ink mb-1 tracking-tight">
-            Attendance Register
+            Create an account
           </h1>
           <p className="text-slate text-sm mb-8">
-            Sign in to mark, review, and manage attendance.
+            Join the attendance register to get started.
           </p>
 
           {error && (
@@ -63,12 +67,27 @@ function Login() {
               {error}
             </div>
           )}
+          {success && (
+            <div className="mb-5 px-4 py-3 rounded-lg bg-green-50 border border-green-100 text-success text-sm">
+              {success}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-ink mb-1.5">
-                Email
-              </label>
+              <label className="block text-sm font-medium text-ink mb-1.5">Full name</label>
+              <input
+                type="text"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Ali Khan"
+                className="w-full px-4 py-2.5 rounded-lg border border-ink/15 text-ink placeholder:text-slate/50 focus:outline-none focus:ring-2 focus:ring-amber/40 focus:border-amber transition"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-ink mb-1.5">Email</label>
               <input
                 type="email"
                 required
@@ -80,9 +99,7 @@ function Login() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-ink mb-1.5">
-                Password
-              </label>
+              <label className="block text-sm font-medium text-ink mb-1.5">Password</label>
               <input
                 type="password"
                 required
@@ -93,29 +110,38 @@ function Login() {
               />
             </div>
 
+            <div>
+              <label className="block text-sm font-medium text-ink mb-1.5">Role</label>
+              <select
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="w-full px-4 py-2.5 rounded-lg border border-ink/15 text-ink focus:outline-none focus:ring-2 focus:ring-amber/40 focus:border-amber transition"
+              >
+                <option value="student">Student</option>
+                <option value="instructor">Instructor</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+
             <button
               type="submit"
               disabled={loading}
               className="w-full bg-ink text-white font-medium py-2.5 rounded-lg hover:bg-ink/90 active:scale-[0.99] transition disabled:opacity-60"
             >
-              {loading ? 'Signing in…' : 'Sign in'}
+              {loading ? 'Creating account…' : 'Create account'}
             </button>
           </form>
 
           <p className="text-center text-sm text-slate mt-6">
-            Don't have an account?{' '}
-            <Link to="/signup" className="text-ink font-medium hover:underline">
-              Sign up
+            Already have an account?{' '}
+            <Link to="/login" className="text-ink font-medium hover:underline">
+              Sign in
             </Link>
           </p>
         </div>
-
-        <p className="text-center text-xs text-slate/70 mt-6">
-          InnoViast · Institutional Attendance Operations Platform
-        </p>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Signup;
