@@ -19,7 +19,7 @@ function Dashboard() {
   const fetchClasses = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5050/api/classes', {
+    const res = await axios.get('https://attendanceplatform-innoviast.onrender.com/api/classes', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setClasses(res.data);

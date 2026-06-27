@@ -23,7 +23,7 @@ function Reports() {
 
   const fetchClasses = async () => {
     try {
-      const res = await axios.get('http://localhost:5050/api/classes', {
+      const res = await axios.get('https://attendanceplatform-innoviast.onrender.com/api/classes', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setClasses(res.data);
@@ -39,7 +39,7 @@ function Reports() {
       if (filters.session) params.session = filters.session;
       if (filters.status) params.status = filters.status;
 
-      const res = await axios.get('http://localhost:5050/api/attendance', {
+      const res = await axios.get('https://attendanceplatform-innoviast.onrender.com/api/attendance', {
         headers: { Authorization: `Bearer ${token}` },
         params,
       });

@@ -18,7 +18,7 @@ function Login() {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:5050/api/auth/login', {
+      const res = await axios.post('https://attendanceplatform-innoviast.onrender.com/api/auth/login',  {
         email,
         password,
       });

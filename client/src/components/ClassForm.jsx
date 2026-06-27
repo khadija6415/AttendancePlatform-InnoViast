@@ -20,7 +20,7 @@ function ClassForm({ onClassCreated }) {
     try {
       const token = localStorage.getItem('token');
       const res = await axios.post(
-        'http://localhost:5050/api/classes',
+       'https://attendanceplatform-innoviast.onrender.com/api/classes',
         { title, date, time },
         { headers: { Authorization: `Bearer ${token}` } }
       );

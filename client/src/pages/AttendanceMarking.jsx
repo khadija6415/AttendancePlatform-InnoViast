@@ -25,7 +25,7 @@ function AttendanceMarking() {
 
   const fetchStudents = async () => {
     try {
-      const res = await axios.get('http://localhost:5050/api/auth/students', {
+     const res = await axios.get('https://attendanceplatform-innoviast.onrender.com/api/auth/students', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setStudents(res.data);
@@ -52,7 +52,7 @@ function AttendanceMarking() {
       const entries = Object.entries(marks);
       for (const [studentId, status] of entries) {
         await axios.post(
-          'http://localhost:5050/api/attendance',
+          'https://attendanceplatform-innoviast.onrender.com/api/attendance',
           { student: studentId, session: sessionId, status },
           { headers: { Authorization: `Bearer ${token}` } }
         );

@@ -20,7 +20,7 @@ function Signup() {
     setLoading(true);
 
     try {
-      await axios.post('http://localhost:5050/api/auth/signup', {
+     await axios.post('https://attendanceplatform-innoviast.onrender.com/api/auth/signup', {
         name,
         email,
         password,
