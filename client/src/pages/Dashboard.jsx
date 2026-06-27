@@ -56,6 +56,12 @@ function Dashboard() {
         </div>
 
         <div className="flex items-center gap-4">
+          <button
+            onClick={() => navigate('/reports')}
+            className="text-sm px-4 py-2 rounded-lg border border-ink/15 text-ink hover:bg-ink hover:text-white transition"
+          >
+            View reports
+          </button>
           <div className="text-right">
             <p className="text-sm font-medium text-ink">{user?.name}</p>
             <p className="text-xs text-slate">{roleLabel[user?.role] || user?.role}</p>
@@ -98,10 +104,7 @@ function Dashboard() {
               ) : (
                 <div className="space-y-3">
                   {classes.map((cls) => (
-                    <div
-                      key={cls._id}
-                      className="flex items-center justify-between px-4 py-3 rounded-lg border border-ink/10 hover:border-amber/40 transition"
-                    >
+                    <div key={cls._id} className="flex items-center justify-between px-4 py-3 rounded-lg border border-ink/10 hover:border-amber/40 transition">
                       <div>
                         <p className="font-medium text-ink">{cls.title}</p>
                         <p className="text-xs text-slate">
@@ -113,10 +116,7 @@ function Dashboard() {
                           {cls.instructor?.name || 'Instructor'}
                         </span>
                         {(user?.role === 'admin' || user?.role === 'instructor') && (
-                          <button
-                            onClick={() => navigate(`/attendance?session=${cls._id}`)}
-                            className="text-xs px-3 py-1.5 rounded-full bg-amber text-white font-medium hover:bg-amber/90 transition"
-                          >
+                          <button onClick={() => navigate(`/attendance?session=${cls._id}`)} className="text-xs px-3 py-1.5 rounded-full bg-amber text-white font-medium hover:bg-amber/90 transition">
                             Mark attendance
                           </button>
                         )}

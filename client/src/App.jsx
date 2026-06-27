@@ -3,6 +3,7 @@ import { AuthProvider } from './context/AuthContext';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import AttendanceMarking from './pages/AttendanceMarking';
+import Reports from './pages/Reports';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/attendance" element={<AttendanceMarking />} />
+          <Route path="/reports" element={<Reports />} />
           <Route path="/" element={<Navigate to="/login" />} />
         </Routes>
       </BrowserRouter>
