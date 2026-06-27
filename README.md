@@ -83,3 +83,18 @@ A full-stack, role-based attendance management system for institutes, bootcamps,
 ---
 
 ## 📁 Project Structure
+
+```
+AttendancePlatform-InnoViast/
+├── client/                  (React frontend)
+│   └── src/
+│       ├── pages/           (Login, Dashboard, AttendanceMarking, Reports)
+│       ├── components/      (Reusable components - ClassForm)
+│       └── context/         (AuthContext - login state)
+├── server/                  (Node/Express backend)
+│   ├── models/               (User, Class, Attendance schemas)
+│   ├── controllers/          (Business logic)
+│   ├── routes/                (API route definitions)
+│   └── middleware/          (JWT auth + role-based authorization)
+└── README.md
+```
